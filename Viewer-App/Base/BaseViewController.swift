@@ -36,11 +36,11 @@ class BaseViewController: UIViewController {
 
 // MARK: - Navigation functions
 extension BaseViewController {
-    func goToItemDetailsPage(_ viewController: UIViewController) {
+    func goToItemDetailsPage(_ viewController: UIViewController, item: Any) {
         // Safe Push VC
         if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ItemDetailsViewController") as? ItemDetailsViewController {
 //            viewController.navigationItem.setCustomNavigationItem(withTitle: "Statement of Account")
-//            viewController.urlString = urlString
+            viewController.item = item
             if let navigator = navigationController {
                 navigator.pushViewController(viewController, animated: true)
             }

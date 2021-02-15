@@ -19,8 +19,15 @@ class MainViewController: BaseViewController {
     var pdfFiles: [PDF]?
     var count = 1
     
-    var items: [Any] = []
+    var items: [Any] = [] {
+        didSet {
+            print("items = \(items)")
+            self.contentView?.itemsTableView.reloadData()
+        }
+    }
     var item: Any?
+    
+    var pdfFile: PDF?
     
     override init() {
         super.init()
@@ -65,6 +72,16 @@ extension MainViewController {
             }
         }
     }
+    
+    private func insertRetrievedItem(item: Any, type: FileType) {
+        switch type {
+        case .pdf:
+            self.items.append(item as! PDF)
+            
+        case .image:
+            self.items.append(item as! Image)
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -74,18 +91,23 @@ extension MainViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.goToItemDetailsPage(self)
+        let item = self.items[indexPath.row]
+        self.goToItemDetailsPage(self, item: item)
     }
 }
 
 // MARK: - UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemTableViewCell", for: indexPath) as? ItemTableViewCell
+        
+        let item = self.items[indexPath.row]
+        cell?.updateData(item: item)
+            
         return cell!
     }
 }
@@ -121,9 +143,12 @@ extension MainViewController: XMLParserDelegate {
         switch currentParsedElement {
         
         case "filename":
+            self.pdfFile = PDF()
+            self.pdfFile?.fileName = string
             break
 
         case "description":
+            self.pdfFile?.description = string
             break
 
         default:
@@ -134,14 +159,22 @@ extension MainViewController: XMLParserDelegate {
 
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if weAreInsideAnItem {
+            print("element name = \(elementName)")
+
             switch elementName {
             
             case "filename":
                 currentParsedElement = ""
-                
+            
             case "description":
                 currentParsedElement = ""
                 
+            case "pdf-item":
+                currentParsedElement = ""
+                if let pdf = self.pdfFile {
+                    self.insertRetrievedItem(item: pdf, type: .pdf)
+                }
+                                
             default:
                 break
             }

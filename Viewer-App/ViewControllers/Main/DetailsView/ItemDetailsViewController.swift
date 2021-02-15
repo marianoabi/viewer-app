@@ -7,16 +7,18 @@
 
 import UIKit
 
-enum FileType {
-    case pdf, image
-}
-
 // MARK: - Properties/Overrides
 class ItemDetailsViewController: BaseViewController {
     var contentView: ItemDetailsView?
     
     var scrollView: UIScrollView?
     var imageView = UIImageView()
+    
+    var item: Any? {
+        didSet {
+            self.prepareResource()
+        }
+    }
     
     override init() {
         super.init()
@@ -30,55 +32,66 @@ class ItemDetailsViewController: BaseViewController {
     }
 }
 
+// MARK: - Lifecycle
 extension ItemDetailsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.setupViewer()
+    }
+    
+    func prepareResource() {
+        if let file = self.item as? PDF {
+            
+            let fileArray = file.fileName?.components(separatedBy: ".")
+            guard let fileURL = Bundle.main.url(forResource: fileArray?.first, withExtension: fileArray?.last) else { return }
+            guard let images = drawImagesFromPDF(withUrl: fileURL) else { return }
+            
+            self.loadImagesOnViewer(images: images)
+            
+        } else {
+            // TODO: Process image file here
+            
+        }
     }
 }
 
+// MARK: - Functionalities/Methods
 extension ItemDetailsViewController {
     
-    func setupViewer() {
-        if let itemUrl = Bundle.main.url(forResource: "relativity", withExtension: "pdf") {
-            guard let images = drawImageFromPDF(withUrl: itemUrl) else { return }
-            
-            scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-            guard let scrollView = scrollView else { return }
-            let doubleTap = UITapGestureRecognizer(target: self, action: #selector(zoomImage(_:)))
-            doubleTap.numberOfTapsRequired = 2
-            scrollView.addGestureRecognizer(doubleTap)
-            
-            scrollView.maximumZoomScale = 2.0
-            scrollView.minimumZoomScale = 1.0
+    func loadImagesOnViewer(images: [UIImage]) {
+        scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        guard let scrollView = scrollView else { return }
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(zoomImage(_:)))
+        doubleTap.numberOfTapsRequired = 2
+        scrollView.addGestureRecognizer(doubleTap)
+        
+        scrollView.maximumZoomScale = 2.0
+        scrollView.minimumZoomScale = 1.0
 //            scrollView.isPagingEnabled = true
-            scrollView.bouncesZoom = false
-            scrollView.alwaysBounceVertical = false
-            scrollView.delegate = self
-            scrollView.delegate = self
+        scrollView.bouncesZoom = false
+        scrollView.alwaysBounceVertical = false
+        scrollView.delegate = self
+        scrollView.delegate = self
+        
+        view.addSubview(scrollView)
+        
+        for (index, image) in images.enumerated() {
             
-            view.addSubview(scrollView)
-            
-            for (index, image) in images.enumerated() {
-                
-                let yOrigin = CGFloat(index) * scrollView.frame.size.height
+            let yOrigin = CGFloat(index) * scrollView.frame.size.height
 
-                let imageView = UIImageView(frame: CGRect(x: 0, y: yOrigin, width: scrollView.frame.width, height: scrollView.frame.height))
-                imageView.image = image
-                self.imageView = imageView
-                imageView.contentMode = .scaleAspectFit
-                
-                scrollView.addSubview(imageView)
-            }
-            scrollView.contentSize = CGSize(width: scrollView.frame.width, height: scrollView.frame.height * CGFloat(images.count))
-            print(scrollView.frame.size.height)
-            print(scrollView.frame.size.width)
-//
+            let imageView = UIImageView(frame: CGRect(x: 0, y: yOrigin, width: scrollView.frame.width, height: scrollView.frame.height))
+            imageView.image = image
+            self.imageView = imageView
+            imageView.contentMode = .scaleAspectFit
+            
+            scrollView.addSubview(imageView)
         }
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: scrollView.frame.height * CGFloat(images.count))
+        print(scrollView.frame.size.height)
+        print(scrollView.frame.size.width)
     }
     
-    private func drawImageFromPDF(withUrl url: URL) -> [UIImage]? {
+    private func drawImagesFromPDF(withUrl url: URL) -> [UIImage]? {
         guard let document = CGPDFDocument(url as CFURL) else { return nil }
         let pages = document.numberOfPages
         var imageArray: [UIImage] = []
@@ -127,6 +140,7 @@ extension ItemDetailsViewController {
         }
 }
 
+// MARK: - UIScrollViewDelegate
 extension ItemDetailsViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
             return imageView

@@ -8,7 +8,9 @@
 import UIKit
 
 class ItemTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var fileNameLabel: LabelPrimaryRegular!
+    @IBOutlet weak var descriptionLabel: LabelPrimaryRegular!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,5 +21,14 @@ class ItemTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+}
+
+extension ItemTableViewCell {
+    func updateData(item: Any) {
+        if let item = item as? PDF {
+            self.fileNameLabel.text = item.fileName
+            self.descriptionLabel.text = item.description
+        }
+        
+    }
 }
