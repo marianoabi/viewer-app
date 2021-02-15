@@ -23,11 +23,19 @@ class MainViewController: BaseViewController {
         didSet {
             print("items = \(items)")
             self.contentView?.itemsTableView.reloadData()
+            
         }
     }
     var item: Any?
     
     var pdfFile: PDF?
+    
+    var imageCount = 0 {
+        didSet {
+            // call Image API here
+//            self.contentView?.itemsTableView.reloadData()
+        }
+    }
     
     override init() {
         super.init()
@@ -79,7 +87,19 @@ extension MainViewController {
             self.items.append(item as! PDF)
             
         case .image:
-            self.items.append(item as! Image)
+            self.items.append(item as! ImageList)
+        }
+    }
+    
+    func fetchImages() {
+        let session = URLSession.shared
+        let url = URL(string:"")!
+        
+        let task = session.dataTask(with: url) { (data, response, error) in
+            
+            // Do something
+            
+            
         }
     }
 }
@@ -99,7 +119,7 @@ extension MainViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count
+        return self.items.count + imageCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,7 +135,6 @@ extension MainViewController: UITableViewDataSource {
 // MARK: - XMLParserDelegate
 extension MainViewController: XMLParserDelegate {
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-        
         if elementName == "viewer" {
             weAreInsideAnItem = true
         }
@@ -131,6 +150,19 @@ extension MainViewController: XMLParserDelegate {
             
             case "description":
                 currentParsedElement = "description"
+            
+            case "image-list":
+                currentParsedElement = "image-list"
+                print("image-list")
+              
+                if let attribute1 = attributeDict["retrieve_images"], let attribute2 = attributeDict["count"] {
+                    let image = ImageList()
+                    image.retrieveItems = attribute1.boolValue
+                    image.count = Int(attribute2)
+                    
+                    guard let count = image.count else { return }
+                    self.imageCount = count
+                }
             
             default:
                 break
@@ -150,7 +182,7 @@ extension MainViewController: XMLParserDelegate {
         case "description":
             self.pdfFile?.description = string
             break
-
+        
         default:
             break
         }

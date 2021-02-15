@@ -8,13 +8,15 @@
 import ObjectMapper
 
 class Image: Mappable {
-    var retrieveItems: Bool = false
-    var count: Int? = 0
     
-    required init?(map: Map) { }
+    var hash: String?
+    var url: String?
+    
+    required convenience init?(map: Map) {
+        self.init()
+    }
     
     func mapping(map: Map) {
-        retrieveItems <- map["retrieve_items"]
-        count <- map["count"]
+        
     }
 }

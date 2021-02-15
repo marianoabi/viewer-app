@@ -99,8 +99,10 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="descriptionLabel" destination="LE2-k1-UsC" id="Dcq-4U-wtz"/>
-                <outlet property="fileNameLabel" destination="hic-Gf-Ksu" id="KK5-PW-Asx"/>
+                <outlet property="attribute1Key" destination="AFZ-MM-sr7" id="g2v-Mx-JWh"/>
+                <outlet property="attribute1Value" destination="hic-Gf-Ksu" id="KK5-PW-Asx"/>
+                <outlet property="attribute2Key" destination="3hr-dt-GK7" id="51c-Hw-Y6o"/>
+                <outlet property="attribute2Value" destination="LE2-k1-UsC" id="Dcq-4U-wtz"/>
             </connections>
             <point key="canvasLocation" x="268.84057971014494" y="156.36160714285714"/>
         </tableViewCell>

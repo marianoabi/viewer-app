@@ -34,8 +34,10 @@
 		7F137AD725D99C4600D0C923 /* relativity.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7F137AD525D99C4600D0C923 /* relativity.pdf */; };
 		7F137ADD25D9A35A00D0C923 /* contents.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7F137ADC25D9A35A00D0C923 /* contents.xml */; };
 		7F137AE025D9A58B00D0C923 /* PDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137ADF25D9A58B00D0C923 /* PDF.swift */; };
-		7F137AFC25DA5ADF00D0C923 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137AFB25DA5ADF00D0C923 /* Image.swift */; };
+		7F137AFC25DA5ADF00D0C923 /* ImageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137AFB25DA5ADF00D0C923 /* ImageList.swift */; };
 		7F137B0225DA734E00D0C923 /* FileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B0125DA734E00D0C923 /* FileType.swift */; };
+		7F137B0925DA798300D0C923 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B0825DA798300D0C923 /* String+Ext.swift */; };
+		7F137B0E25DA7F8000D0C923 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B0D25DA7F8000D0C923 /* Image.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,8 +70,10 @@
 		7F137AD525D99C4600D0C923 /* relativity.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = relativity.pdf; sourceTree = "<group>"; };
 		7F137ADC25D9A35A00D0C923 /* contents.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = contents.xml; sourceTree = "<group>"; };
 		7F137ADF25D9A58B00D0C923 /* PDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDF.swift; sourceTree = "<group>"; };
-		7F137AFB25DA5ADF00D0C923 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		7F137AFB25DA5ADF00D0C923 /* ImageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageList.swift; sourceTree = "<group>"; };
 		7F137B0125DA734E00D0C923 /* FileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileType.swift; sourceTree = "<group>"; };
+		7F137B0825DA798300D0C923 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		7F137B0D25DA7F8000D0C923 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		9A2118B97F57449B662B7E3B /* Pods_Viewer_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Viewer_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D21F9B4A908C2487B1EB7ECA /* Pods-Viewer-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Viewer-App.debug.xcconfig"; path = "Target Support Files/Pods-Viewer-App/Pods-Viewer-App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,7 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				7F137ADF25D9A58B00D0C923 /* PDF.swift */,
-				7F137AFB25DA5ADF00D0C923 /* Image.swift */,
+				7F137AFB25DA5ADF00D0C923 /* ImageList.swift */,
+				7F137B0D25DA7F8000D0C923 /* Image.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -215,6 +220,7 @@
 		7F137AAA25D98F1600D0C923 /* Uitilities */ = {
 			isa = PBXGroup;
 			children = (
+				7F137B0725DA797600D0C923 /* Extension */,
 				7F137B0425DA735B00D0C923 /* FileType */,
 				7F137ABB25D98FC700D0C923 /* Labels */,
 				7F137ABA25D98FB000D0C923 /* Constants */,
@@ -274,6 +280,14 @@
 				7F137B0125DA734E00D0C923 /* FileType.swift */,
 			);
 			path = FileType;
+			sourceTree = "<group>";
+		};
+		7F137B0725DA797600D0C923 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				7F137B0825DA798300D0C923 /* String+Ext.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		EB3E35319C46E324ADC8154F /* Pods */ = {
@@ -413,11 +427,13 @@
 				7F137AD025D99A2F00D0C923 /* ItemDetailsView.swift in Sources */,
 				7F137A9D25D98A9600D0C923 /* BaseViewController.swift in Sources */,
 				7F137AB825D98F5800D0C923 /* ViewerApp.swift in Sources */,
+				7F137B0925DA798300D0C923 /* String+Ext.swift in Sources */,
 				7F137ACC25D99A1D00D0C923 /* ItemDetailsViewController.swift in Sources */,
 				7F137ABD25D98FE300D0C923 /* LabelPrimaryRegular.swift in Sources */,
 				7F137A7B25D988BA00D0C923 /* MainViewController.swift in Sources */,
 				7F137B0225DA734E00D0C923 /* FileType.swift in Sources */,
-				7F137AFC25DA5ADF00D0C923 /* Image.swift in Sources */,
+				7F137AFC25DA5ADF00D0C923 /* ImageList.swift in Sources */,
+				7F137B0E25DA7F8000D0C923 /* Image.swift in Sources */,
 				7F137AA725D98CE100D0C923 /* ItemTableViewCell.swift in Sources */,
 				7F137A9625D98A2700D0C923 /* MainView.swift in Sources */,
 				7F137AC125D9902A00D0C923 /* LabelPrimaryBold.swift in Sources */,
