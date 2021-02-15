@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewer>
+  <pdf-list>
+    <pdf-item>
+      <filename>alice-in-wonderland.pdf</filename>
+      <description>The adventure of Alice in Wonderland</description>
+    </pdf-item>
+    <pdf-item>
+      <filename>relativity.pdf</filename>
+      <description>Einstein's Theory of Relativity and Gravitation</description>
+    </pdf-item>
+  </pdf-list>
+  <image-list retrieve_images="true" image_count="5" />
+</viewer>

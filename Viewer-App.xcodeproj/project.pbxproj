@@ -3,27 +3,71 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		720C271464EFB4C820EFFADE /* Pods_Viewer_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A2118B97F57449B662B7E3B /* Pods_Viewer_App.framework */; };
 		7F137A7725D988BA00D0C923 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137A7625D988BA00D0C923 /* AppDelegate.swift */; };
 		7F137A7925D988BA00D0C923 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137A7825D988BA00D0C923 /* SceneDelegate.swift */; };
-		7F137A7B25D988BA00D0C923 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137A7A25D988BA00D0C923 /* ViewController.swift */; };
+		7F137A7B25D988BA00D0C923 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137A7A25D988BA00D0C923 /* MainViewController.swift */; };
 		7F137A7E25D988BA00D0C923 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F137A7C25D988BA00D0C923 /* Main.storyboard */; };
 		7F137A8025D988BA00D0C923 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F137A7F25D988BA00D0C923 /* Assets.xcassets */; };
 		7F137A8325D988BA00D0C923 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F137A8125D988BA00D0C923 /* LaunchScreen.storyboard */; };
+		7F137A9625D98A2700D0C923 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137A9525D98A2700D0C923 /* MainView.swift */; };
+		7F137A9925D98A4100D0C923 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F137A9825D98A4100D0C923 /* MainView.xib */; };
+		7F137A9D25D98A9600D0C923 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137A9C25D98A9600D0C923 /* BaseViewController.swift */; };
+		7F137AA725D98CE100D0C923 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137AA525D98CE100D0C923 /* ItemTableViewCell.swift */; };
+		7F137AA825D98CE100D0C923 /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F137AA625D98CE100D0C923 /* ItemTableViewCell.xib */; };
+		7F137AB125D98F4500D0C923 /* Comfortaa-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F137AAC25D98F4500D0C923 /* Comfortaa-Regular.ttf */; };
+		7F137AB225D98F4500D0C923 /* Comfortaa-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F137AAD25D98F4500D0C923 /* Comfortaa-Medium.ttf */; };
+		7F137AB325D98F4500D0C923 /* Comfortaa-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F137AAE25D98F4500D0C923 /* Comfortaa-SemiBold.ttf */; };
+		7F137AB425D98F4500D0C923 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F137AAF25D98F4500D0C923 /* Comfortaa-Bold.ttf */; };
+		7F137AB525D98F4500D0C923 /* Comfortaa-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F137AB025D98F4500D0C923 /* Comfortaa-Light.ttf */; };
+		7F137AB825D98F5800D0C923 /* ViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137AB725D98F5800D0C923 /* ViewerApp.swift */; };
+		7F137ABD25D98FE300D0C923 /* LabelPrimaryRegular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137ABC25D98FE300D0C923 /* LabelPrimaryRegular.swift */; };
+		7F137AC125D9902A00D0C923 /* LabelPrimaryBold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137AC025D9902A00D0C923 /* LabelPrimaryBold.swift */; };
+		7F137ACC25D99A1D00D0C923 /* ItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137ACA25D99A1D00D0C923 /* ItemDetailsViewController.swift */; };
+		7F137ACD25D99A1D00D0C923 /* ItemDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F137ACB25D99A1D00D0C923 /* ItemDetailsView.xib */; };
+		7F137AD025D99A2F00D0C923 /* ItemDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137ACF25D99A2F00D0C923 /* ItemDetailsView.swift */; };
+		7F137AD625D99C4600D0C923 /* adventures-of-sherlock-holmes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7F137AD425D99C4600D0C923 /* adventures-of-sherlock-holmes.pdf */; };
+		7F137AD725D99C4600D0C923 /* relativity.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7F137AD525D99C4600D0C923 /* relativity.pdf */; };
+		7F137ADD25D9A35A00D0C923 /* contents.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7F137ADC25D9A35A00D0C923 /* contents.xml */; };
+		7F137AE025D9A58B00D0C923 /* PDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137ADF25D9A58B00D0C923 /* PDF.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B567A2160CA1CE219E949A6 /* Pods-Viewer-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Viewer-App.release.xcconfig"; path = "Target Support Files/Pods-Viewer-App/Pods-Viewer-App.release.xcconfig"; sourceTree = "<group>"; };
 		7F137A7325D988BA00D0C923 /* Viewer-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Viewer-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F137A7625D988BA00D0C923 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F137A7825D988BA00D0C923 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7F137A7A25D988BA00D0C923 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7F137A7A25D988BA00D0C923 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7F137A7D25D988BA00D0C923 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7F137A7F25D988BA00D0C923 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F137A8225D988BA00D0C923 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F137A8425D988BA00D0C923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F137A9525D98A2700D0C923 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		7F137A9825D98A4100D0C923 /* MainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
+		7F137A9C25D98A9600D0C923 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		7F137AA525D98CE100D0C923 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
+		7F137AA625D98CE100D0C923 /* ItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
+		7F137AAC25D98F4500D0C923 /* Comfortaa-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Regular.ttf"; sourceTree = "<group>"; };
+		7F137AAD25D98F4500D0C923 /* Comfortaa-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Medium.ttf"; sourceTree = "<group>"; };
+		7F137AAE25D98F4500D0C923 /* Comfortaa-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-SemiBold.ttf"; sourceTree = "<group>"; };
+		7F137AAF25D98F4500D0C923 /* Comfortaa-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Bold.ttf"; sourceTree = "<group>"; };
+		7F137AB025D98F4500D0C923 /* Comfortaa-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-Light.ttf"; sourceTree = "<group>"; };
+		7F137AB725D98F5800D0C923 /* ViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerApp.swift; sourceTree = "<group>"; };
+		7F137ABC25D98FE300D0C923 /* LabelPrimaryRegular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelPrimaryRegular.swift; sourceTree = "<group>"; };
+		7F137AC025D9902A00D0C923 /* LabelPrimaryBold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelPrimaryBold.swift; sourceTree = "<group>"; };
+		7F137ACA25D99A1D00D0C923 /* ItemDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsViewController.swift; sourceTree = "<group>"; };
+		7F137ACB25D99A1D00D0C923 /* ItemDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemDetailsView.xib; sourceTree = "<group>"; };
+		7F137ACF25D99A2F00D0C923 /* ItemDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsView.swift; sourceTree = "<group>"; };
+		7F137AD425D99C4600D0C923 /* adventures-of-sherlock-holmes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "adventures-of-sherlock-holmes.pdf"; sourceTree = "<group>"; };
+		7F137AD525D99C4600D0C923 /* relativity.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = relativity.pdf; sourceTree = "<group>"; };
+		7F137ADC25D9A35A00D0C923 /* contents.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = contents.xml; sourceTree = "<group>"; };
+		7F137ADF25D9A58B00D0C923 /* PDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDF.swift; sourceTree = "<group>"; };
+		9A2118B97F57449B662B7E3B /* Pods_Viewer_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Viewer_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D21F9B4A908C2487B1EB7ECA /* Pods-Viewer-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Viewer-App.debug.xcconfig"; path = "Target Support Files/Pods-Viewer-App/Pods-Viewer-App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +75,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				720C271464EFB4C820EFFADE /* Pods_Viewer_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C248AC600F588EDBCDA165D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9A2118B97F57449B662B7E3B /* Pods_Viewer_App.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7F137A6A25D988BA00D0C923 = {
 			isa = PBXGroup;
 			children = (
 				7F137A7525D988BA00D0C923 /* Viewer-App */,
 				7F137A7425D988BA00D0C923 /* Products */,
+				EB3E35319C46E324ADC8154F /* Pods */,
+				6C248AC600F588EDBCDA165D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +111,164 @@
 		7F137A7525D988BA00D0C923 /* Viewer-App */ = {
 			isa = PBXGroup;
 			children = (
+				7F137AD425D99C4600D0C923 /* adventures-of-sherlock-holmes.pdf */,
+				7F137ADC25D9A35A00D0C923 /* contents.xml */,
+				7F137AD525D99C4600D0C923 /* relativity.pdf */,
+				7F137A8B25D988C000D0C923 /* App */,
+				7F137A9B25D98A8000D0C923 /* Base */,
+				7F137A8E25D988CF00D0C923 /* Models */,
+				7F137A8F25D988D600D0C923 /* Services */,
+				7F137A9125D9890000D0C923 /* Storyboards */,
+				7F137A9025D988E000D0C923 /* SupportingFiles */,
+				7F137A8D25D988C600D0C923 /* ViewControllers */,
+			);
+			path = "Viewer-App";
+			sourceTree = "<group>";
+		};
+		7F137A8B25D988C000D0C923 /* App */ = {
+			isa = PBXGroup;
+			children = (
 				7F137A7625D988BA00D0C923 /* AppDelegate.swift */,
 				7F137A7825D988BA00D0C923 /* SceneDelegate.swift */,
-				7F137A7A25D988BA00D0C923 /* ViewController.swift */,
-				7F137A7C25D988BA00D0C923 /* Main.storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		7F137A8D25D988C600D0C923 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7F137A9325D989A200D0C923 /* Main */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7F137A8E25D988CF00D0C923 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7F137ADF25D9A58B00D0C923 /* PDF.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7F137A8F25D988D600D0C923 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		7F137A9025D988E000D0C923 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				7F137AD925D99C5A00D0C923 /* Resources */,
+				7F137AAA25D98F1600D0C923 /* Uitilities */,
+				7F137AAB25D98F1D00D0C923 /* Fonts */,
 				7F137A7F25D988BA00D0C923 /* Assets.xcassets */,
 				7F137A8125D988BA00D0C923 /* LaunchScreen.storyboard */,
 				7F137A8425D988BA00D0C923 /* Info.plist */,
 			);
-			path = "Viewer-App";
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		7F137A9125D9890000D0C923 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7F137A7C25D988BA00D0C923 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7F137A9325D989A200D0C923 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7F137AC925D998D500D0C923 /* DetailsView */,
+				7F137AA425D98CC300D0C923 /* ItemTableViewCell */,
+				7F137A7A25D988BA00D0C923 /* MainViewController.swift */,
+				7F137A9525D98A2700D0C923 /* MainView.swift */,
+				7F137A9825D98A4100D0C923 /* MainView.xib */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		7F137A9B25D98A8000D0C923 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				7F137A9C25D98A9600D0C923 /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		7F137AA425D98CC300D0C923 /* ItemTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7F137AA525D98CE100D0C923 /* ItemTableViewCell.swift */,
+				7F137AA625D98CE100D0C923 /* ItemTableViewCell.xib */,
+			);
+			path = ItemTableViewCell;
+			sourceTree = "<group>";
+		};
+		7F137AAA25D98F1600D0C923 /* Uitilities */ = {
+			isa = PBXGroup;
+			children = (
+				7F137ABB25D98FC700D0C923 /* Labels */,
+				7F137ABA25D98FB000D0C923 /* Constants */,
+			);
+			path = Uitilities;
+			sourceTree = "<group>";
+		};
+		7F137AAB25D98F1D00D0C923 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7F137AAF25D98F4500D0C923 /* Comfortaa-Bold.ttf */,
+				7F137AB025D98F4500D0C923 /* Comfortaa-Light.ttf */,
+				7F137AAD25D98F4500D0C923 /* Comfortaa-Medium.ttf */,
+				7F137AAC25D98F4500D0C923 /* Comfortaa-Regular.ttf */,
+				7F137AAE25D98F4500D0C923 /* Comfortaa-SemiBold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		7F137ABA25D98FB000D0C923 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				7F137AB725D98F5800D0C923 /* ViewerApp.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		7F137ABB25D98FC700D0C923 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				7F137ABC25D98FE300D0C923 /* LabelPrimaryRegular.swift */,
+				7F137AC025D9902A00D0C923 /* LabelPrimaryBold.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
+		7F137AC925D998D500D0C923 /* DetailsView */ = {
+			isa = PBXGroup;
+			children = (
+				7F137ACA25D99A1D00D0C923 /* ItemDetailsViewController.swift */,
+				7F137ACF25D99A2F00D0C923 /* ItemDetailsView.swift */,
+				7F137ACB25D99A1D00D0C923 /* ItemDetailsView.xib */,
+			);
+			path = DetailsView;
+			sourceTree = "<group>";
+		};
+		7F137AD925D99C5A00D0C923 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EB3E35319C46E324ADC8154F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D21F9B4A908C2487B1EB7ECA /* Pods-Viewer-App.debug.xcconfig */,
+				5B567A2160CA1CE219E949A6 /* Pods-Viewer-App.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +278,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7F137A8725D988BA00D0C923 /* Build configuration list for PBXNativeTarget "Viewer-App" */;
 			buildPhases = (
+				6AD7478F7CA1B6011AF78F8B /* [CP] Check Pods Manifest.lock */,
 				7F137A6F25D988BA00D0C923 /* Sources */,
 				7F137A7025D988BA00D0C923 /* Frameworks */,
 				7F137A7125D988BA00D0C923 /* Resources */,
+				6290D3F5169DB9168B23BBE3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,22 +330,84 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F137AD725D99C4600D0C923 /* relativity.pdf in Resources */,
 				7F137A8325D988BA00D0C923 /* LaunchScreen.storyboard in Resources */,
+				7F137A9925D98A4100D0C923 /* MainView.xib in Resources */,
+				7F137AB325D98F4500D0C923 /* Comfortaa-SemiBold.ttf in Resources */,
+				7F137AB225D98F4500D0C923 /* Comfortaa-Medium.ttf in Resources */,
+				7F137AB525D98F4500D0C923 /* Comfortaa-Light.ttf in Resources */,
 				7F137A8025D988BA00D0C923 /* Assets.xcassets in Resources */,
+				7F137ADD25D9A35A00D0C923 /* contents.xml in Resources */,
 				7F137A7E25D988BA00D0C923 /* Main.storyboard in Resources */,
+				7F137AB125D98F4500D0C923 /* Comfortaa-Regular.ttf in Resources */,
+				7F137AA825D98CE100D0C923 /* ItemTableViewCell.xib in Resources */,
+				7F137ACD25D99A1D00D0C923 /* ItemDetailsView.xib in Resources */,
+				7F137AB425D98F4500D0C923 /* Comfortaa-Bold.ttf in Resources */,
+				7F137AD625D99C4600D0C923 /* adventures-of-sherlock-holmes.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6290D3F5169DB9168B23BBE3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Viewer-App/Pods-Viewer-App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Viewer-App/Pods-Viewer-App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Viewer-App/Pods-Viewer-App-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6AD7478F7CA1B6011AF78F8B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Viewer-App-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7F137A6F25D988BA00D0C923 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F137A7B25D988BA00D0C923 /* ViewController.swift in Sources */,
+				7F137AD025D99A2F00D0C923 /* ItemDetailsView.swift in Sources */,
+				7F137A9D25D98A9600D0C923 /* BaseViewController.swift in Sources */,
+				7F137AB825D98F5800D0C923 /* ViewerApp.swift in Sources */,
+				7F137ACC25D99A1D00D0C923 /* ItemDetailsViewController.swift in Sources */,
+				7F137ABD25D98FE300D0C923 /* LabelPrimaryRegular.swift in Sources */,
+				7F137A7B25D988BA00D0C923 /* MainViewController.swift in Sources */,
+				7F137AA725D98CE100D0C923 /* ItemTableViewCell.swift in Sources */,
+				7F137A9625D98A2700D0C923 /* MainView.swift in Sources */,
+				7F137AC125D9902A00D0C923 /* LabelPrimaryBold.swift in Sources */,
 				7F137A7725D988BA00D0C923 /* AppDelegate.swift in Sources */,
 				7F137A7925D988BA00D0C923 /* SceneDelegate.swift in Sources */,
+				7F137AE025D9A58B00D0C923 /* PDF.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,17 +551,19 @@
 		};
 		7F137A8825D988BA00D0C923 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D21F9B4A908C2487B1EB7ECA /* Pods-Viewer-App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YRWDL64LRS;
-				INFOPLIST_FILE = "Viewer-App/Info.plist";
+				DEVELOPMENT_TEAM = Y8HV6G3JRL;
+				INFOPLIST_FILE = "Viewer-App/SupportingFiles/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mariano.abigail.Viewer-App";
+				PRODUCT_BUNDLE_IDENTIFIER = com.testApp2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -302,17 +572,19 @@
 		};
 		7F137A8925D988BA00D0C923 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B567A2160CA1CE219E949A6 /* Pods-Viewer-App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YRWDL64LRS;
-				INFOPLIST_FILE = "Viewer-App/Info.plist";
+				DEVELOPMENT_TEAM = Y8HV6G3JRL;
+				INFOPLIST_FILE = "Viewer-App/SupportingFiles/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mariano.abigail.Viewer-App";
+				PRODUCT_BUNDLE_IDENTIFIER = com.testApp2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
