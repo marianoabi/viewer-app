@@ -36,8 +36,8 @@ extension ItemTableViewCell {
             
         } else if let item = item as? Image {
             
-            self.attribute1Key.text = "Image Hash:"
-            self.attribute1Key.text = item.hash
+            self.attribute1Key.text = "Author:"
+            self.attribute1Value.text = item.author
             
             self.attribute2Key.text = "URL:"
             self.attribute2Value.text = item.url        }

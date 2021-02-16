@@ -19,23 +19,16 @@ class MainViewController: BaseViewController {
     var pdfFiles: [PDF]?
     var count = 1
     
-    var items: [Any] = [] {
-        didSet {
-            print("items = \(items)")
-            self.contentView?.itemsTableView.reloadData()
-            
-        }
-    }
+    var items: [Any] = []
+    
     var item: Any?
     
     var pdfFile: PDF?
     
-    var imageCount = 0 {
-        didSet {
-            // call Image API here
-//            self.contentView?.itemsTableView.reloadData()
-        }
-    }
+    var imageCount = 0
+    
+    private var picsumProvider = BaseMoyaProvider<PicsumService>()
+    private lazy var presenter = MainPresenter(self, picsumProvider: picsumProvider)
     
     override init() {
         super.init()
@@ -62,6 +55,9 @@ extension MainViewController {
 // MARK: - Functions/Methods
 extension MainViewController {
     func setupViews() {
+        self.navigationItem.title = "Home"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
         self.contentView?.itemsTableView.register(UINib(nibName: "ItemTableViewCell", bundle: nil), forCellReuseIdentifier: "ItemTableViewCell")
         self.contentView?.itemsTableView.delegate = self
         self.contentView?.itemsTableView.dataSource = self
@@ -91,16 +87,8 @@ extension MainViewController {
         }
     }
     
-    func fetchImages() {
-        let session = URLSession.shared
-        let url = URL(string:"")!
-        
-        let task = session.dataTask(with: url) { (data, response, error) in
-            
-            // Do something
-            
-            
-        }
+    func getImageList(count: Int) {
+        self.presenter.getImageList(limit: count)
     }
 }
 
@@ -119,10 +107,14 @@ extension MainViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count + imageCount
+        return self.items.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == self.items.count {
+            return UITableViewCell()
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemTableViewCell", for: indexPath) as? ItemTableViewCell
         
         let item = self.items[indexPath.row]
@@ -155,13 +147,14 @@ extension MainViewController: XMLParserDelegate {
                 currentParsedElement = "image-list"
                 print("image-list")
               
-                if let attribute1 = attributeDict["retrieve_images"], let attribute2 = attributeDict["count"] {
+                if let attribute1 = attributeDict["retrieve_images"], let attribute2 = attributeDict["image_count"] {
                     let image = ImageList()
                     image.retrieveItems = attribute1.boolValue
-                    image.count = Int(attribute2)
+                    image.count = Int(attribute2) ?? 0
                     
-                    guard let count = image.count else { return }
-                    self.imageCount = count
+                    if image.retrieveItems {
+                        self.getImageList(count: image.count)
+                    }
                 }
             
             default:
@@ -215,5 +208,26 @@ extension MainViewController: XMLParserDelegate {
                 weAreInsideAnItem = false
             }
         }
+    }
+}
+
+// MARK: - XMLParserDelegate
+extension MainViewController: MainPresenterView {
+    func successGetImageList(_ presenter: MainPresenter, list: [Image]) {
+        for image in list {
+            self.items.append(image)
+        }
+        
+        self.contentView?.itemsTableView.reloadData()
+    }
+    
+    func onError(_ presenter: MainPresenter, error: String) {
+        let alert = UIAlertController(title: "Error",
+                                      message: error,
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }

@@ -38,6 +38,13 @@
 		7F137B0225DA734E00D0C923 /* FileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B0125DA734E00D0C923 /* FileType.swift */; };
 		7F137B0925DA798300D0C923 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B0825DA798300D0C923 /* String+Ext.swift */; };
 		7F137B0E25DA7F8000D0C923 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B0D25DA7F8000D0C923 /* Image.swift */; };
+		7F137B1525DA967500D0C923 /* ImgurService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B1425DA967500D0C923 /* ImgurService.swift */; };
+		7F137B1825DA969900D0C923 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B1725DA969900D0C923 /* BaseService.swift */; };
+		7F137B1C25DA987400D0C923 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B1B25DA987400D0C923 /* MainPresenter.swift */; };
+		7F137B2125DA993100D0C923 /* BaseMoyaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B2025DA993100D0C923 /* BaseMoyaProvider.swift */; };
+		7F137B2425DAC7F600D0C923 /* VerbosePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B2325DAC7F600D0C923 /* VerbosePlugin.swift */; };
+		7F137B2825DAC84000D0C923 /* PicsumService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B2725DAC84000D0C923 /* PicsumService.swift */; };
+		7F137B2C25DAC8C500D0C923 /* CoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B2B25DAC8C500D0C923 /* CoreService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +81,13 @@
 		7F137B0125DA734E00D0C923 /* FileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileType.swift; sourceTree = "<group>"; };
 		7F137B0825DA798300D0C923 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		7F137B0D25DA7F8000D0C923 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		7F137B1425DA967500D0C923 /* ImgurService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurService.swift; sourceTree = "<group>"; };
+		7F137B1725DA969900D0C923 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		7F137B1B25DA987400D0C923 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		7F137B2025DA993100D0C923 /* BaseMoyaProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMoyaProvider.swift; sourceTree = "<group>"; };
+		7F137B2325DAC7F600D0C923 /* VerbosePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerbosePlugin.swift; sourceTree = "<group>"; };
+		7F137B2725DAC84000D0C923 /* PicsumService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicsumService.swift; sourceTree = "<group>"; };
+		7F137B2B25DAC8C500D0C923 /* CoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreService.swift; sourceTree = "<group>"; };
 		9A2118B97F57449B662B7E3B /* Pods_Viewer_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Viewer_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D21F9B4A908C2487B1EB7ECA /* Pods-Viewer-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Viewer-App.debug.xcconfig"; path = "Target Support Files/Pods-Viewer-App/Pods-Viewer-App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,6 +177,12 @@
 		7F137A8F25D988D600D0C923 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7F137B2625DAC82600D0C923 /* Picsum */,
+				7F137B1F25DA991D00D0C923 /* Imgur */,
+				7F137B1725DA969900D0C923 /* BaseService.swift */,
+				7F137B2025DA993100D0C923 /* BaseMoyaProvider.swift */,
+				7F137B2325DAC7F600D0C923 /* VerbosePlugin.swift */,
+				7F137B2B25DAC8C500D0C923 /* CoreService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -194,6 +214,7 @@
 				7F137AC925D998D500D0C923 /* DetailsView */,
 				7F137AA425D98CC300D0C923 /* ItemTableViewCell */,
 				7F137A7A25D988BA00D0C923 /* MainViewController.swift */,
+				7F137B1B25DA987400D0C923 /* MainPresenter.swift */,
 				7F137A9525D98A2700D0C923 /* MainView.swift */,
 				7F137A9825D98A4100D0C923 /* MainView.xib */,
 			);
@@ -288,6 +309,22 @@
 				7F137B0825DA798300D0C923 /* String+Ext.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		7F137B1F25DA991D00D0C923 /* Imgur */ = {
+			isa = PBXGroup;
+			children = (
+				7F137B1425DA967500D0C923 /* ImgurService.swift */,
+			);
+			path = Imgur;
+			sourceTree = "<group>";
+		};
+		7F137B2625DAC82600D0C923 /* Picsum */ = {
+			isa = PBXGroup;
+			children = (
+				7F137B2725DAC84000D0C923 /* PicsumService.swift */,
+			);
+			path = Picsum;
 			sourceTree = "<group>";
 		};
 		EB3E35319C46E324ADC8154F /* Pods */ = {
@@ -426,20 +463,27 @@
 			files = (
 				7F137AD025D99A2F00D0C923 /* ItemDetailsView.swift in Sources */,
 				7F137A9D25D98A9600D0C923 /* BaseViewController.swift in Sources */,
+				7F137B2825DAC84000D0C923 /* PicsumService.swift in Sources */,
 				7F137AB825D98F5800D0C923 /* ViewerApp.swift in Sources */,
 				7F137B0925DA798300D0C923 /* String+Ext.swift in Sources */,
 				7F137ACC25D99A1D00D0C923 /* ItemDetailsViewController.swift in Sources */,
 				7F137ABD25D98FE300D0C923 /* LabelPrimaryRegular.swift in Sources */,
 				7F137A7B25D988BA00D0C923 /* MainViewController.swift in Sources */,
 				7F137B0225DA734E00D0C923 /* FileType.swift in Sources */,
+				7F137B1825DA969900D0C923 /* BaseService.swift in Sources */,
 				7F137AFC25DA5ADF00D0C923 /* ImageList.swift in Sources */,
 				7F137B0E25DA7F8000D0C923 /* Image.swift in Sources */,
 				7F137AA725D98CE100D0C923 /* ItemTableViewCell.swift in Sources */,
+				7F137B2C25DAC8C500D0C923 /* CoreService.swift in Sources */,
 				7F137A9625D98A2700D0C923 /* MainView.swift in Sources */,
+				7F137B2125DA993100D0C923 /* BaseMoyaProvider.swift in Sources */,
 				7F137AC125D9902A00D0C923 /* LabelPrimaryBold.swift in Sources */,
+				7F137B1525DA967500D0C923 /* ImgurService.swift in Sources */,
 				7F137A7725D988BA00D0C923 /* AppDelegate.swift in Sources */,
 				7F137A7925D988BA00D0C923 /* SceneDelegate.swift in Sources */,
+				7F137B2425DAC7F600D0C923 /* VerbosePlugin.swift in Sources */,
 				7F137AE025D9A58B00D0C923 /* PDF.swift in Sources */,
+				7F137B1C25DA987400D0C923 /* MainPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

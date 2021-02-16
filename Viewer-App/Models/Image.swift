@@ -9,7 +9,7 @@ import ObjectMapper
 
 class Image: Mappable {
     
-    var hash: String?
+    var author: String?
     var url: String?
     
     required convenience init?(map: Map) {
@@ -17,6 +17,7 @@ class Image: Mappable {
     }
     
     func mapping(map: Map) {
-        
+        author <- map["author"]
+        url <- map["download_url"]
     }
 }

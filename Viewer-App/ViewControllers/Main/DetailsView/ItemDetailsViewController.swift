@@ -44,14 +44,30 @@ extension ItemDetailsViewController {
             
             let fileArray = file.fileName?.components(separatedBy: ".")
             guard let fileURL = Bundle.main.url(forResource: fileArray?.first, withExtension: fileArray?.last) else { return }
-            guard let images = drawImagesFromPDF(withUrl: fileURL) else { return }
             
+            DispatchQueue.main.async {
+                guard let images = self.drawImagesFromPDF(withUrl: fileURL) else { return }
+                self.loadImagesOnViewer(images: images)
+            }
+            
+            
+        } else if let file = self.item as? Image, let url = file.url {
+            
+            var images = [UIImage]()
+            guard let image = convertImageUrlToImage(url) else { return }
+            images.append(image)
             self.loadImagesOnViewer(images: images)
-            
-        } else {
-            // TODO: Process image file here
-            
         }
+    }
+    
+    private func convertImageUrlToImage(_ urlString: String) -> UIImage? {
+        guard let imageURL = URL(string: urlString) else { return nil }
+        var image: UIImage?
+        
+        guard let imageData = try? Data(contentsOf: imageURL) else { return nil }
+        image = UIImage(data: imageData)
+                    
+        return image
     }
 }
 
@@ -59,7 +75,9 @@ extension ItemDetailsViewController {
 extension ItemDetailsViewController {
     
     func loadImagesOnViewer(images: [UIImage]) {
-        scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        guard let navbarHeight = self.navigationController?.navigationBar.frame.size.height else { return }
+        
+        scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.contentView!.frame.width, height: self.contentView!.frame.height -
         guard let scrollView = scrollView else { return }
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(zoomImage(_:)))
         doubleTap.numberOfTapsRequired = 2
@@ -67,17 +85,22 @@ extension ItemDetailsViewController {
         
         scrollView.maximumZoomScale = 2.0
         scrollView.minimumZoomScale = 1.0
-//            scrollView.isPagingEnabled = true
+        scrollView.isPagingEnabled = true
         scrollView.bouncesZoom = false
         scrollView.alwaysBounceVertical = false
         scrollView.delegate = self
-        scrollView.delegate = self
+//        scrollView.backgroundColor = .black
+//        scrollView.contentInset = .zero
+//        scrollView.automaticallyAdjustsScrollIndicatorInsets = false
+        scrollView.clipsToBounds = false
+        scrollView.alwaysBounceHorizontal = false
+
         
         view.addSubview(scrollView)
         
         for (index, image) in images.enumerated() {
             
-            let yOrigin = CGFloat(index) * scrollView.frame.size.height
+            let yOrigin = CGFloat(index) * scrollView.frame.size.width - navbarHeight
 
             let imageView = UIImageView(frame: CGRect(x: 0, y: yOrigin, width: scrollView.frame.width, height: scrollView.frame.height))
             imageView.image = image
@@ -86,9 +109,7 @@ extension ItemDetailsViewController {
             
             scrollView.addSubview(imageView)
         }
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: scrollView.frame.height * CGFloat(images.count))
-        print(scrollView.frame.size.height)
-        print(scrollView.frame.size.width)
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: scrollView.frame.size.height * CGFloat(images.count))
     }
     
     private func drawImagesFromPDF(withUrl url: URL) -> [UIImage]? {

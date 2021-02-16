@@ -10,7 +10,7 @@ import ObjectMapper
 class ImageList: Mappable {
     var images: [Image]?
     var retrieveItems: Bool = false
-    var count: Int? = 0
+    var count: Int = 0
     
     required convenience init?(map: Map) {
         self.init()

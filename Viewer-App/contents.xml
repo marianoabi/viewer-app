@@ -10,5 +10,5 @@
       <description>Einstein's Theory of Relativity and Gravitation</description>
     </pdf-item>
   </pdf-list>
-  <image-list retrieve_images="true" image_count="5" />
+  <image-list retrieve_images="true" image_count="10" />
 </viewer>
