@@ -20,9 +20,7 @@ class MainViewController: BaseViewController {
     var count = 1
     
     var items: [Any] = []
-    
-    var item: Any?
-    
+        
     var pdfFile: PDF?
     
     var imageCount = 0
@@ -91,6 +89,65 @@ extension MainViewController {
     func getImageList(count: Int) {
         self.presenter.getImageList(limit: count)
     }
+    
+    private func prepareResource(item: Any) -> [UIImage]? {
+        if let file = item as? PDF {
+
+            let fileArray = file.fileName?.components(separatedBy: ".")
+            guard let fileURL = Bundle.main.url(forResource: fileArray?.first, withExtension: fileArray?.last) else { return nil }
+
+            guard let images = self.drawImagesFromPDF(withUrl: fileURL) else { return nil }
+            return images
+
+        } else if let file = item as? Image, let url = file.url {
+
+            var images = [UIImage]()
+            guard let image = convertImageUrlToImage(url) else { return nil }
+            images.append(image)
+            
+            return images
+        }
+        
+        return nil
+    }
+    
+    private func convertImageUrlToImage(_ urlString: String) -> UIImage? {
+        guard let imageURL = URL(string: urlString) else { return nil }
+        var image: UIImage?
+
+        guard let imageData = try? Data(contentsOf: imageURL) else { return nil }
+        image = UIImage(data: imageData)
+
+        return image
+    }
+    
+    private func drawImagesFromPDF(withUrl url: URL) -> [UIImage]? {
+        guard let document = CGPDFDocument(url as CFURL) else { return nil }
+        let pages = document.numberOfPages
+        var imageArray: [UIImage] = []
+        var count = 0
+        
+        while count < pages {
+            guard let page = document.page(at: count + 1) else { return nil }
+
+            let pageRect = page.getBoxRect(.mediaBox)
+            let renderer = UIGraphicsImageRenderer(size: pageRect.size)
+            let img = renderer.image { ctx in
+                UIColor.white.set()
+                ctx.fill(pageRect)
+
+                ctx.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
+                ctx.cgContext.scaleBy(x: 1.0, y: -1.0)
+
+                ctx.cgContext.drawPDFPage(page)
+            }
+            
+            imageArray.append(img)
+            count += 1
+        }
+
+        return imageArray
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -101,7 +158,18 @@ extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = self.items[indexPath.row]
-        self.goToItemDetailsPage(self, item: item)
+        if let images = self.prepareResource(item: item) {
+            self.goToItemDetailsPage(self, images: images)
+        } else {
+            let errorMessage = "File not found."
+            let alert = UIAlertController(title: "Error",
+                                          message: errorMessage,
+                                          preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 

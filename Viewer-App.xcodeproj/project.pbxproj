@@ -216,7 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				7F137AC925D998D500D0C923 /* DetailsView */,
-				7F137AA425D98CC300D0C923 /* FileNotFoundTableViewCell */,
+				7F137AA425D98CC300D0C923 /* TableViewCell */,
 				7F137A7A25D988BA00D0C923 /* MainViewController.swift */,
 				7F137B1B25DA987400D0C923 /* MainPresenter.swift */,
 				7F137A9525D98A2700D0C923 /* MainView.swift */,
@@ -233,13 +233,13 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		7F137AA425D98CC300D0C923 /* FileNotFoundTableViewCell */ = {
+		7F137AA425D98CC300D0C923 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
 				7F137B3525DB761B00D0C923 /* FileNotFoundTableViewCell */,
 				7F137B3325DB760B00D0C923 /* ItemTableViewCell */,
 			);
-			path = FileNotFoundTableViewCell;
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		7F137AAA25D98F1600D0C923 /* Uitilities */ = {
