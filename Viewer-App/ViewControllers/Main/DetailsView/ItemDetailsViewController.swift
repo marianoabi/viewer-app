@@ -56,7 +56,6 @@ extension ItemDetailsViewController {
         scrollView.delegate = self
         scrollView.backgroundColor = ViewerApp.Colors.background
         scrollView.clipsToBounds = false
-        scrollView.alwaysBounceHorizontal = false
         view.addSubview(scrollView)
         
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(zoomImage(_:)))

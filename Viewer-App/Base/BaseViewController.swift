@@ -7,6 +7,8 @@
 
 import UIKit
 
+fileprivate var aView: UIView?
+
 // MARK: - Properties/Overrides
 class BaseViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -31,6 +33,25 @@ class BaseViewController: UIViewController {
     
     deinit {
         print("Deallocated - \(self)")
+    }
+    
+    func showLoadingView() {
+        
+        DispatchQueue.main.async {
+            aView = UIView(frame: self.view.bounds)
+            aView?.backgroundColor = ViewerApp.Colors.content50
+            let ai = UIActivityIndicatorView(style: .large)
+            ai.color = .white
+            ai.center = aView!.center
+            ai.startAnimating()
+            aView?.addSubview(ai)
+            self.view.addSubview(aView!)
+        }
+    }
+        
+    final func removeLoadingView() {
+        aView?.removeFromSuperview()
+        aView = nil
     }
 }
 

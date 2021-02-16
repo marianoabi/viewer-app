@@ -9,21 +9,16 @@ import UIKit
 
 // MARK: - Properties/Overrides
 class MainViewController: BaseViewController {
-    var contentView: MainView?
-    var xmlParser: XMLParser?
+    private var contentView: MainView?
+    
+    private var xmlParser: XMLParser?
+    private var currentParsedElement = String()
+    private var weAreInsideAnItem = false
         
-    var currentParsedElement = String()
-    var weAreInsideAnItem = false
-    var writing = false
+    private var items: [Any] = []
+    private var pdfFile: PDF?
     
-    var pdfFiles: [PDF]?
-    var count = 1
-    
-    var items: [Any] = []
-        
-    var pdfFile: PDF?
-    
-    var imageCount = 0
+    private var images: [UIImage]?
     
     private var picsumProvider = BaseMoyaProvider<PicsumService>()
     private lazy var presenter = MainPresenter(self, picsumProvider: picsumProvider)
@@ -94,20 +89,19 @@ extension MainViewController {
         if let file = item as? PDF {
 
             let fileArray = file.fileName?.components(separatedBy: ".")
+            
             guard let fileURL = Bundle.main.url(forResource: fileArray?.first, withExtension: fileArray?.last) else { return nil }
 
-            guard let images = self.drawImagesFromPDF(withUrl: fileURL) else { return nil }
-            return images
+            guard let drawnImages = self.drawImagesFromPDF(withUrl: fileURL) else { return nil }
+            return drawnImages
 
         } else if let file = item as? Image, let url = file.url {
 
-            var images = [UIImage]()
-            guard let image = convertImageUrlToImage(url) else { return nil }
-            images.append(image)
-            
-            return images
+            self.images = []
+            guard let convertedImage = convertImageUrlToImage(url) else { return nil }
+            self.images?.append(convertedImage)
+            return self.images
         }
-        
         return nil
     }
     
@@ -159,7 +153,7 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = self.items[indexPath.row]
         if let images = self.prepareResource(item: item) {
-            self.goToItemDetailsPage(self, images: images)
+                self.goToItemDetailsPage(self, images: images)
         } else {
             let errorMessage = "File not found."
             let alert = UIAlertController(title: "Error",
@@ -299,5 +293,13 @@ extension MainViewController: MainPresenterView {
         alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showLoadingView(_ presenter: MainPresenter) {
+        self.showLoadingView()
+    }
+    
+    func removeLoadingView(_ presenter: MainPresenter) {
+        self.removeLoadingView()
     }
 }
