@@ -47,6 +47,7 @@
 		7F137B2C25DAC8C500D0C923 /* CoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B2B25DAC8C500D0C923 /* CoreService.swift */; };
 		7F137B3825DB764F00D0C923 /* FileNotFoundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B3625DB764F00D0C923 /* FileNotFoundTableViewCell.swift */; };
 		7F137B3925DB764F00D0C923 /* FileNotFoundTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F137B3725DB764F00D0C923 /* FileNotFoundTableViewCell.xib */; };
+		7F137B5025DB992000D0C923 /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B4F25DB992000D0C923 /* Indicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,7 @@
 		7F137B2B25DAC8C500D0C923 /* CoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreService.swift; sourceTree = "<group>"; };
 		7F137B3625DB764F00D0C923 /* FileNotFoundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileNotFoundTableViewCell.swift; sourceTree = "<group>"; };
 		7F137B3725DB764F00D0C923 /* FileNotFoundTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileNotFoundTableViewCell.xib; sourceTree = "<group>"; };
+		7F137B4F25DB992000D0C923 /* Indicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Indicator.swift; sourceTree = "<group>"; };
 		9A2118B97F57449B662B7E3B /* Pods_Viewer_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Viewer_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D21F9B4A908C2487B1EB7ECA /* Pods-Viewer-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Viewer-App.debug.xcconfig"; path = "Target Support Files/Pods-Viewer-App/Pods-Viewer-App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -245,6 +247,7 @@
 		7F137AAA25D98F1600D0C923 /* Uitilities */ = {
 			isa = PBXGroup;
 			children = (
+				7F137B4E25DB98F100D0C923 /* Views */,
 				7F137B0725DA797600D0C923 /* Extension */,
 				7F137B0425DA735B00D0C923 /* FileType */,
 				7F137ABB25D98FC700D0C923 /* Labels */,
@@ -347,6 +350,14 @@
 				7F137B3725DB764F00D0C923 /* FileNotFoundTableViewCell.xib */,
 			);
 			path = FileNotFoundTableViewCell;
+			sourceTree = "<group>";
+		};
+		7F137B4E25DB98F100D0C923 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7F137B4F25DB992000D0C923 /* Indicator.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		EB3E35319C46E324ADC8154F /* Pods */ = {
@@ -496,6 +507,7 @@
 				7F137B1825DA969900D0C923 /* BaseService.swift in Sources */,
 				7F137AFC25DA5ADF00D0C923 /* ImageList.swift in Sources */,
 				7F137B3825DB764F00D0C923 /* FileNotFoundTableViewCell.swift in Sources */,
+				7F137B5025DB992000D0C923 /* Indicator.swift in Sources */,
 				7F137B0E25DA7F8000D0C923 /* Image.swift in Sources */,
 				7F137AA725D98CE100D0C923 /* ItemTableViewCell.swift in Sources */,
 				7F137B2C25DAC8C500D0C923 /* CoreService.swift in Sources */,

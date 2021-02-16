@@ -54,7 +54,7 @@ extension ItemDetailsViewController {
         scrollView.bouncesZoom = false
         scrollView.alwaysBounceVertical = false
         scrollView.delegate = self
-        scrollView.backgroundColor = .blue
+        scrollView.backgroundColor = ViewerApp.Colors.background
         scrollView.clipsToBounds = false
         scrollView.alwaysBounceHorizontal = false
         view.addSubview(scrollView)

@@ -25,8 +25,9 @@ class MainPresenter {
 
 extension MainPresenter {
     func getImageList(limit: Int) {
+        Indicator.sharedInstance.showLoading()
         self.picsumProvider?.request(.getImageList(limit: limit), completion: { (result) in
-            
+            Indicator.sharedInstance.hideLoading()
             switch result {
             case let .success(response):
                 do {
@@ -39,6 +40,7 @@ extension MainPresenter {
                 
             case let .failure(error):
                 self.view?.onError(self, error: error.localizedDescription)
+                Indicator.sharedInstance.hideLoading()
             }
         })
     }

@@ -21,5 +21,6 @@ class LabelPrimaryBold: UILabel {
 
     func configureLabel() {
         self.font = UIFont(name: ViewerApp.Fonts.primaryBold, size: self.font.pointSize)
+        self.textColor = ViewerApp.Colors.content
     }
 }

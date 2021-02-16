@@ -20,5 +20,6 @@ class LabelPrimaryRegular: UILabel {
 
     func configureLabel() {
         self.font = UIFont(name: ViewerApp.Fonts.primaryRegular, size: self.font.pointSize)
+        self.textColor = ViewerApp.Colors.content
     }
 }
