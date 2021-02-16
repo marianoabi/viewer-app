@@ -170,19 +170,27 @@ extension MainViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count + 1
+        return self.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == self.items.count {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FileNotFoundTableViewCell", for: indexPath) as? FileNotFoundTableViewCell
-            cell?.isUserInteractionEnabled = false
-            return cell!
-        }
+//        if indexPath.row == self.items.count {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "FileNotFoundTableViewCell", for: indexPath) as? FileNotFoundTableViewCell
+//            cell?.isUserInteractionEnabled = false
+//            return cell!
+//        }
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemTableViewCell", for: indexPath) as? ItemTableViewCell
         let item = self.items[indexPath.row]
         cell?.updateData(item: item)
+        
+        if indexPath.row % 2 == 0 {
+            print("even")
+            cell?.backgroundColor = ViewerApp.Colors.lightGray
+        } else {
+            print("odd")
+            cell?.backgroundColor = ViewerApp.Colors.background
+        }
             
         return cell!
     }

@@ -17,5 +17,6 @@ struct ViewerApp {
         static let content = UIColor(named: "content")
         static let content50 = UIColor(named: "content50")
         static let background = UIColor(named: "background")
+        static let lightGray = UIColor(named: "lightGray")
     }
 }

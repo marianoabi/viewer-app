@@ -14,6 +14,16 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet weak var attribute2Key: LabelPrimaryBold!
     @IBOutlet weak var attribute2Value: LabelPrimaryRegular!
     
+    @IBOutlet weak var backgroundView1: UIView!
+    @IBOutlet weak var backgroundView2: UIView!
+    
+    override var backgroundColor: UIColor? {
+        didSet {
+            backgroundView1.backgroundColor = backgroundColor
+            backgroundView2.backgroundColor = backgroundColor
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -40,7 +50,7 @@ extension ItemTableViewCell {
             self.attribute1Value.text = item.author
             
             self.attribute2Key.text = "URL:"
-            self.attribute2Value.text = item.url        }
-        
+            self.attribute2Value.text = item.url
+        }
     }
 }
