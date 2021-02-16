@@ -59,6 +59,7 @@ extension MainViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         self.contentView?.itemsTableView.register(UINib(nibName: "ItemTableViewCell", bundle: nil), forCellReuseIdentifier: "ItemTableViewCell")
+        self.contentView?.itemsTableView.register(UINib(nibName: "FileNotFoundTableViewCell", bundle: nil), forCellReuseIdentifier: "FileNotFoundTableViewCell")
         self.contentView?.itemsTableView.delegate = self
         self.contentView?.itemsTableView.dataSource = self
     }
@@ -112,11 +113,12 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == self.items.count {
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FileNotFoundTableViewCell", for: indexPath) as? FileNotFoundTableViewCell
+            cell?.isUserInteractionEnabled = false
+            return cell!
         }
-        
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemTableViewCell", for: indexPath) as? ItemTableViewCell
-        
         let item = self.items[indexPath.row]
         cell?.updateData(item: item)
             
