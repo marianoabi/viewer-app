@@ -41,7 +41,7 @@ extension ItemTableViewCell {
             self.attribute1Key.text = "Filename:"
             self.attribute1Value.text = item.fileName
             
-            self.attribute1Key.text = "Description"
+            self.attribute2Key.text = "Description"
             self.attribute2Value.text = item.description
             
         } else if let item = item as? Image {

@@ -18,7 +18,13 @@ class MainViewController: BaseViewController {
     private var items: [Any] = []
     private var pdfFile: PDF?
     
-    private var images: [UIImage]?
+    private var images: [UIImage] = [] {
+        didSet {
+            if images.count > 0 {
+                self.goToItemDetailsPage(self, images: images)
+            }
+        }
+    }
     
     private var picsumProvider = BaseMoyaProvider<PicsumService>()
     private lazy var presenter = MainPresenter(self, picsumProvider: picsumProvider)
@@ -59,14 +65,14 @@ extension MainViewController {
     
     private func parseXML() {
         if let xmlUrl = Bundle.main.url(forResource: "contents", withExtension: "xml") {
-            print("xml path \(xmlUrl)")
+            
             do {
                 let myData = try Data(contentsOf: xmlUrl)
                 self.xmlParser = XMLParser(data: myData)
                 self.xmlParser?.delegate = self
                 self.xmlParser?.parse()
             } catch {
-                print("Error")
+                self.showAlert(title: "Error", message: "Error parsing XML.")
             }
         }
     }
@@ -85,44 +91,40 @@ extension MainViewController {
         self.presenter.getImageList(limit: count)
     }
     
-    private func prepareResource(item: Any) -> [UIImage]? {
+    private func prepareResource(item: Any) {
         if let file = item as? PDF {
-
             let fileArray = file.fileName?.components(separatedBy: ".")
             
-            guard let fileURL = Bundle.main.url(forResource: fileArray?.first, withExtension: fileArray?.last) else { return nil }
-
-            guard let drawnImages = self.drawImagesFromPDF(withUrl: fileURL) else { return nil }
-            return drawnImages
-
+            if let fileURL = Bundle.main.url(forResource: fileArray?.first, withExtension: fileArray?.last) {
+                self.drawImagesFromPDF(withUrl: fileURL)
+            } else {
+                self.showAlert(title: "Error", message: "File not found.")
+            }
+            
         } else if let file = item as? Image, let url = file.url {
-
-            self.images = []
-            guard let convertedImage = convertImageUrlToImage(url) else { return nil }
-            self.images?.append(convertedImage)
-            return self.images
+            self.presenter.fetchImage(of: url)
+            
         }
-        return nil
     }
     
-    private func convertImageUrlToImage(_ urlString: String) -> UIImage? {
-        guard let imageURL = URL(string: urlString) else { return nil }
-        var image: UIImage?
-
-        guard let imageData = try? Data(contentsOf: imageURL) else { return nil }
-        image = UIImage(data: imageData)
-
-        return image
-    }
+//    private func convertImageUrlToImage(_ urlString: String) -> UIImage? {
+//        guard let imageURL = URL(string: urlString) else { return nil }
+//
+//
+//        guard let imageData = try? Data(contentsOf: imageURL) else { return nil }
+//        image = UIImage(data: imageData)
+//
+//        return image
+//    }
     
-    private func drawImagesFromPDF(withUrl url: URL) -> [UIImage]? {
-        guard let document = CGPDFDocument(url as CFURL) else { return nil }
+    private func drawImagesFromPDF(withUrl url: URL) {
+        guard let document = CGPDFDocument(url as CFURL) else { return }
         let pages = document.numberOfPages
         var imageArray: [UIImage] = []
         var count = 0
         
         while count < pages {
-            guard let page = document.page(at: count + 1) else { return nil }
+            guard let page = document.page(at: count + 1) else { return }
 
             let pageRect = page.getBoxRect(.mediaBox)
             let renderer = UIGraphicsImageRenderer(size: pageRect.size)
@@ -139,8 +141,16 @@ extension MainViewController {
             imageArray.append(img)
             count += 1
         }
-
-        return imageArray
+        
+        self.images = []
+        self.images = imageArray
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -152,18 +162,7 @@ extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = self.items[indexPath.row]
-        if let images = self.prepareResource(item: item) {
-                self.goToItemDetailsPage(self, images: images)
-        } else {
-            let errorMessage = "File not found."
-            let alert = UIAlertController(title: "Error",
-                                          message: errorMessage,
-                                          preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
-            
-            self.present(alert, animated: true, completion: nil)
-        }
+        self.prepareResource(item: item)
     }
 }
 
@@ -174,21 +173,13 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if indexPath.row == self.items.count {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "FileNotFoundTableViewCell", for: indexPath) as? FileNotFoundTableViewCell
-//            cell?.isUserInteractionEnabled = false
-//            return cell!
-//        }
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemTableViewCell", for: indexPath) as? ItemTableViewCell
         let item = self.items[indexPath.row]
         cell?.updateData(item: item)
         
         if indexPath.row % 2 == 0 {
-            print("even")
             cell?.backgroundColor = ViewerApp.Colors.lightGray
         } else {
-            print("odd")
             cell?.backgroundColor = ViewerApp.Colors.background
         }
             
@@ -285,22 +276,36 @@ extension MainViewController: XMLParserDelegate {
 
 // MARK: - XMLParserDelegate
 extension MainViewController: MainPresenterView {
+    func successFetchImage(_ presenter: MainPresenter, data: Data) {
+        
+        DispatchQueue.main.async {
+            if let image = UIImage(data: data) {
+                print("image size = \(image.size.height) \(image.size.width)")
+                self.images = []
+                self.images.append(image)
+            
+            } else {
+                self.showAlert(title: "Error", message: "Invalid Image data.")
+            }
+        }
+    }
+    
     func successGetImageList(_ presenter: MainPresenter, list: [Image]) {
         for image in list {
             self.items.append(image)
         }
         
+        // Note: Add non-existent file to show "File not found" alert
+        let pdf = PDF()
+        pdf.fileName = nil
+        pdf.description = nil
+        self.items.append(pdf)
+        
         self.contentView?.itemsTableView.reloadData()
     }
     
     func onError(_ presenter: MainPresenter, error: String) {
-        let alert = UIAlertController(title: "Error",
-                                      message: error,
-                                      preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
+        self.showAlert(title: "Error", message: error)
     }
     
     func showLoadingView(_ presenter: MainPresenter) {

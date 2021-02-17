@@ -8,10 +8,12 @@
 import Moya_ObjectMapper
 
 protocol MainPresenterView {
+    func showLoadingView()
+    func removeLoadingView()
+    
     func successGetImageList(_ presenter: MainPresenter, list: [Image])
     func onError(_ presenter: MainPresenter, error: String)
-    func showLoadingView(_ presenter: MainPresenter)
-    func removeLoadingView(_ presenter: MainPresenter)
+    func successFetchImage(_ presenter: MainPresenter, data: Data)
 }
 
 class MainPresenter {
@@ -28,9 +30,9 @@ class MainPresenter {
 
 extension MainPresenter {
     func getImageList(limit: Int) {
-        self.view?.showLoadingView(self)
+        self.view?.showLoadingView()
         self.picsumProvider?.request(.getImageList(limit: limit), completion: { (result) in
-            self.view?.removeLoadingView(self)
+            self.view?.removeLoadingView()
             switch result {
             case let .success(response):
                 do {
@@ -43,21 +45,27 @@ extension MainPresenter {
                 
             case let .failure(error):
                 self.view?.onError(self, error: error.localizedDescription)
-                self.view?.removeLoadingView(self)
+                self.view?.removeLoadingView()
             }
         })
     }
     
-    func fetchImage(from urlString: String, completionHandler: @escaping (_ data: Data?) -> ()) {
+    func fetchImage(of urlString: String) {
+        self.view?.showLoadingView()
+        
         let session = URLSession.shared
         guard let url = URL(string: urlString) else { return }
         
         let dataTask = session.dataTask(with: url) { (data, response, error) in
+            
+            DispatchQueue.main.async {
+                self.view?.removeLoadingView()
+            }
+            
             if error != nil {
-                print("Error fetching image")
-                completionHandler(nil)
+                self.view?.onError(self, error: error?.localizedDescription ?? "Error fetching image.")
             } else {
-                completionHandler(data)
+                self.view?.successFetchImage(self, data: data!)
             }
         }
         

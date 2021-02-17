@@ -38,6 +38,7 @@ extension ItemDetailsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.setupScrollView()
     }
 }
 
@@ -45,35 +46,41 @@ extension ItemDetailsViewController {
 extension ItemDetailsViewController {
     
     func loadImagesOnViewer(images: [UIImage]) {
+        
         scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         guard let scrollView = scrollView else { return }
+
+        self.view.addSubview(scrollView)
         
-        scrollView.maximumZoomScale = 2.0
-        scrollView.minimumZoomScale = 1.0
-        scrollView.isPagingEnabled = true
-        scrollView.bouncesZoom = false
-        scrollView.alwaysBounceVertical = false
-        scrollView.delegate = self
-        scrollView.backgroundColor = ViewerApp.Colors.background
-        scrollView.clipsToBounds = false
-        view.addSubview(scrollView)
-        
-        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(zoomImage(_:)))
-        doubleTap.numberOfTapsRequired = 2
-        scrollView.addGestureRecognizer(doubleTap)
+        var imageViewWidth = 0.0
+        var scrollViewHeight = 0.0
         
         for (index, image) in images.enumerated() {
+            var ratio = 0.0
             
-            let yOrigin = CGFloat(index) * scrollView.frame.size.height
-
-            let imageView = UIImageView(frame: CGRect(x: 0, y: yOrigin, width: scrollView.frame.width, height: scrollView.frame.height))
+            let height = image.size.height
+            let width = image.size.width
+            
+            if height > width {
+                ratio = Double(height / width)
+            } else {
+                ratio = Double(width / height)
+            }
+            
+            
+            imageViewWidth = Double(scrollView.frame.size.width) * ratio
+            let yOrigin = CGFloat(imageViewWidth + 50) * CGFloat(index)
+            
+            let imageView = UIImageView(frame: CGRect(x: 0, y: yOrigin, width: scrollView.frame.size.width, height: CGFloat(imageViewWidth)))
             imageView.image = image
-            self.imageView = imageView
             imageView.contentMode = .scaleAspectFit
-            
             scrollView.addSubview(imageView)
+            
+            scrollViewHeight = scrollViewHeight + imageViewWidth
         }
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: scrollView.frame.size.height * CGFloat(images.count))
+        
+        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: CGFloat(scrollViewHeight) * CGFloat(images.count))
+        scrollView.contentOffset = CGPoint(x: scrollView.frame.size.width, y: scrollView.frame.size.height)
     }
     
     @objc func zoomImage(_ sender: UITapGestureRecognizer) {
@@ -86,15 +93,29 @@ extension ItemDetailsViewController {
         }
     }
     
-    func zoomRectForScale(scale: CGFloat, center: CGPoint) -> CGRect {
-            var zoomRect = CGRect.zero
-            zoomRect.size.height = imageView.frame.size.height / scale
-            zoomRect.size.width  = imageView.frame.size.width  / scale
-            let newCenter = imageView.convert(center, from: scrollView)
-            zoomRect.origin.x = newCenter.x - (zoomRect.size.width / 2.0)
-            zoomRect.origin.y = newCenter.y - (zoomRect.size.height / 2.0)
-            return zoomRect
-        }
+    private func zoomRectForScale(scale: CGFloat, center: CGPoint) -> CGRect {
+        var zoomRect = CGRect.zero
+        zoomRect.size.height = imageView.frame.size.height / scale
+        zoomRect.size.width  = imageView.frame.size.width  / scale
+        let newCenter = imageView.convert(center, from: scrollView)
+        zoomRect.origin.x = newCenter.x - (zoomRect.size.width / 2.0)
+        zoomRect.origin.y = newCenter.y - (zoomRect.size.height / 2.0)
+        return zoomRect
+    }
+    
+    private func setupScrollView() {
+        guard let scrollView = scrollView else { return }
+        
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.delegate = self
+        scrollView.maximumZoomScale = 5.0
+        scrollView.minimumZoomScale = 1.0
+        scrollView.bouncesZoom = false
+        scrollView.alwaysBounceVertical = false
+        scrollView.alwaysBounceHorizontal = false
+        scrollView.backgroundColor = ViewerApp.Colors.background
+        scrollView.clipsToBounds = false
+    }
 }
 
 // MARK: - UIScrollViewDelegate
