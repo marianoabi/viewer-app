@@ -9,8 +9,8 @@ import UIKit
 
 struct ViewerApp {
     struct Fonts {
-        static let primaryRegular = "Comfortaa-Regular"
-        static let primaryBold = "Comfortaa-Bold"
+        static let primaryRegular = "RobotoCondensed-Regular"
+        static let primaryBold = "RobotoCondensed-Bold"
     }
     
     struct Colors {
