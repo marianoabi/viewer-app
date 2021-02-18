@@ -10,7 +10,7 @@ import WebKit
 
 // MARK: - Properties/Overrides
 class ItemDetailsViewController: BaseViewController {
-    var contentView: ItemDetailsView?
+    private var contentView: ItemDetailsView?
     
     private var webView = WKWebView()
     

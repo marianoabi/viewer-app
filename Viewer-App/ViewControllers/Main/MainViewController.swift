@@ -168,7 +168,6 @@ extension MainViewController: XMLParserDelegate {
             
             case "image-list":
                 currentParsedElement = "image-list"
-                print("image-list")
               
                 if let attribute1 = attributeDict["retrieve_images"], let attribute2 = attributeDict["image_count"] {
                     let image = ImageList()
@@ -207,7 +206,6 @@ extension MainViewController: XMLParserDelegate {
 
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if weAreInsideAnItem {
-            print("element name = \(elementName)")
 
             switch elementName {
             
