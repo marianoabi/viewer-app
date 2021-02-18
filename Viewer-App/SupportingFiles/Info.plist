@@ -23,10 +23,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>RobotoCondensed-Bold.ttf</string>
-		<string>RobotoCondensed-Italic.ttf</string>
 		<string>RobotoCondensed-Regular.ttf</string>
-		<string>Comfortaa-Bold.ttf</string>
-		<string>Comfortaa-Regular.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
