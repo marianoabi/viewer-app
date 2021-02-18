@@ -63,7 +63,7 @@ extension MainPresenter {
             }
             
             if error != nil {
-                self.view?.onError(self, error: error?.localizedDescription ?? "Error fetching image.")
+                self.view?.onError(self, error: error?.localizedDescription ?? ViewerApp.ErrorMessages.errorFetchingImage)
             } else {
                 self.view?.successFetchImage(self, data: data!)
             }

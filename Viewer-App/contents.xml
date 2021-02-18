@@ -6,8 +6,8 @@
       <description>The adventure of Sherlock Holmes</description>
     </pdf-item>
     <pdf-item>
-      <filename>hakdog.pdf</filename>
-      <description>The adventure of Sherlock Holmes</description>
+      <filename>filenotfound.pdf</filename>
+      <description>Click this to show "File not found" alert. Data inserted in XML file.</description>
     </pdf-item>
     <pdf-item>
       <filename>relativity.pdf</filename>

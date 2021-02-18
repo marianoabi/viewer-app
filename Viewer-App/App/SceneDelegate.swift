@@ -14,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
-        if let destinationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
+        if let destinationVC = UIStoryboard(name: ViewerApp.Storyboards.main, bundle: nil).instantiateViewController(withIdentifier: ViewerApp.ViewControllers.mainViewController) as? MainViewController {
             let rootViewController = UINavigationController(rootViewController: destinationVC)
             window?.rootViewController = rootViewController
         }

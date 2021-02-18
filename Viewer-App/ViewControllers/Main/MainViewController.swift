@@ -54,7 +54,7 @@ extension MainViewController {
 // MARK: - Functions/Methods
 extension MainViewController {
     func setupViews() {
-        self.navigationItem.title = "Home"
+        self.navigationItem.title = ViewerApp.Str.home
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         self.contentView?.itemsTableView.register(UINib(nibName: "ItemTableViewCell", bundle: nil), forCellReuseIdentifier: "ItemTableViewCell")
@@ -72,7 +72,7 @@ extension MainViewController {
                 self.xmlParser?.delegate = self
                 self.xmlParser?.parse()
             } catch {
-                self.showAlert(title: "Error", message: "Error parsing XML.")
+                self.showAlert(title: ViewerApp.Str.error, message: ViewerApp.ErrorMessages.errorParsingXML)
             }
         }
     }
@@ -98,7 +98,7 @@ extension MainViewController {
             if let fileURL = Bundle.main.url(forResource: fileArray?.first, withExtension: fileArray?.last) {
                 self.drawImagesFromPDF(withUrl: fileURL)
             } else {
-                self.showAlert(title: "Error", message: "File not found.")
+                self.showAlert(title: ViewerApp.Str.error, message: ViewerApp.ErrorMessages.fileNotFound)
             }
             
         } else if let file = item as? Image, let url = file.url {
@@ -118,6 +118,8 @@ extension MainViewController {
 //    }
     
     private func drawImagesFromPDF(withUrl url: URL) {
+        self.images = []
+
         guard let document = CGPDFDocument(url as CFURL) else { return }
         let pages = document.numberOfPages
         var imageArray: [UIImage] = []
@@ -141,15 +143,13 @@ extension MainViewController {
             imageArray.append(img)
             count += 1
         }
-        
-        self.images = []
         self.images = imageArray
     }
     
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: ViewerApp.Str.okay, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 }
@@ -280,12 +280,11 @@ extension MainViewController: MainPresenterView {
         
         DispatchQueue.main.async {
             if let image = UIImage(data: data) {
-                print("image size = \(image.size.height) \(image.size.width)")
                 self.images = []
                 self.images.append(image)
             
             } else {
-                self.showAlert(title: "Error", message: "Invalid Image data.")
+                self.showAlert(title: ViewerApp.Str.error, message: ViewerApp.ErrorMessages.invalidImageData)
             }
         }
     }
@@ -295,7 +294,7 @@ extension MainViewController: MainPresenterView {
             self.items.append(image)
         }
         
-        // Note: Add non-existent file to show "File not found" alert
+        // Note: Add non-existent file at the bottom of the list to show "File not found" alert
         let pdf = PDF()
         pdf.fileName = nil
         pdf.description = nil
@@ -305,7 +304,7 @@ extension MainViewController: MainPresenterView {
     }
     
     func onError(_ presenter: MainPresenter, error: String) {
-        self.showAlert(title: "Error", message: error)
+        self.showAlert(title: ViewerApp.Str.error, message: error)
     }
     
     func showLoadingView(_ presenter: MainPresenter) {

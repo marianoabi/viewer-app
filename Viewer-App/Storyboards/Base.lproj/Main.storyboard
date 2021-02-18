@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4La-YV-5Ed">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,6 +20,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="7KD-pe-MPx"/>
+                    <connections>
+                        <segue destination="po3-qA-rhH" kind="showDetail" id="Ui9-cU-foH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -29,7 +33,7 @@
             <objects>
                 <viewController storyboardIdentifier="ItemDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="po3-qA-rhH" customClass="ItemDetailsViewController" customModule="Viewer_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ikj-MN-c8K">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="dse-Bs-ao5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -42,7 +46,7 @@
         <!--Navigation Controller-->
         <scene sceneID="sMz-gp-ySf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4La-YV-5Ed" sceneMemberID="viewController">
+                <navigationController id="4La-YV-5Ed" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GJx-Av-pQF">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
