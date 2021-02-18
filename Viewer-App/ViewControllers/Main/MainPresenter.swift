@@ -13,7 +13,6 @@ protocol MainPresenterView {
     
     func successGetImageList(_ presenter: MainPresenter, list: [Image])
     func onError(_ presenter: MainPresenter, error: String)
-    func successFetchImage(_ presenter: MainPresenter, data: Data)
 }
 
 class MainPresenter {
@@ -40,7 +39,7 @@ extension MainPresenter {
                     self.view?.successGetImageList(self, list: imageList)
                     
                 } catch {
-                    self.view?.onError(self, error: "An error ocurred while mapping JSON.")
+                    self.view?.onError(self, error: ViewerApp.ErrorMessages.mapJSONError)
                 }
                 
             case let .failure(error):
@@ -48,27 +47,5 @@ extension MainPresenter {
                 self.view?.removeLoadingView()
             }
         })
-    }
-    
-    func fetchImage(of urlString: String) {
-        self.view?.showLoadingView()
-        
-        let session = URLSession.shared
-        guard let url = URL(string: urlString) else { return }
-        
-        let dataTask = session.dataTask(with: url) { (data, response, error) in
-            
-            DispatchQueue.main.async {
-                self.view?.removeLoadingView()
-            }
-            
-            if error != nil {
-                self.view?.onError(self, error: error?.localizedDescription ?? ViewerApp.ErrorMessages.errorFetchingImage)
-            } else {
-                self.view?.successFetchImage(self, data: data!)
-            }
-        }
-        
-        dataTask.resume()
     }
 }

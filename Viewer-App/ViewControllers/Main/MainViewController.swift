@@ -18,14 +18,6 @@ class MainViewController: BaseViewController {
     private var items: [Any] = []
     private var pdfFile: PDF?
     
-    private var images: [UIImage] = [] {
-        didSet {
-            if images.count > 0 {
-                self.goToItemDetailsPage(self, images: images)
-            }
-        }
-    }
-    
     private var picsumProvider = BaseMoyaProvider<PicsumService>()
     private lazy var presenter = MainPresenter(self, picsumProvider: picsumProvider)
     
@@ -72,7 +64,7 @@ extension MainViewController {
                 self.xmlParser?.delegate = self
                 self.xmlParser?.parse()
             } catch {
-                self.showAlert(title: ViewerApp.Str.error, message: ViewerApp.ErrorMessages.errorParsingXML)
+                self.showAlert(title: ViewerApp.Str.error, message: ViewerApp.ErrorMessages.parsingXMLError)
             }
         }
     }
@@ -92,58 +84,26 @@ extension MainViewController {
     }
     
     private func prepareResource(item: Any) {
+        
         if let file = item as? PDF {
+            // items is PDF
+
             let fileArray = file.fileName?.components(separatedBy: ".")
             
             if let fileURL = Bundle.main.url(forResource: fileArray?.first, withExtension: fileArray?.last) {
-                self.drawImagesFromPDF(withUrl: fileURL)
+                let request = URLRequest(url: fileURL)
+                self.goToItemDetailsPage(self, request: request)
+                
             } else {
-                self.showAlert(title: ViewerApp.Str.error, message: ViewerApp.ErrorMessages.fileNotFound)
+                self.showAlert(title: ViewerApp.Str.error, message: ViewerApp.ErrorMessages.fileNotFoundError)
             }
             
-        } else if let file = item as? Image, let url = file.url {
-            self.presenter.fetchImage(of: url)
-            
+        } else if let file = item as? Image, let urlString = file.url, let url = URL(string: urlString) {
+            // items is Image
+
+            let request = URLRequest(url: url)
+            self.goToItemDetailsPage(self, request: request)
         }
-    }
-    
-//    private func convertImageUrlToImage(_ urlString: String) -> UIImage? {
-//        guard let imageURL = URL(string: urlString) else { return nil }
-//
-//
-//        guard let imageData = try? Data(contentsOf: imageURL) else { return nil }
-//        image = UIImage(data: imageData)
-//
-//        return image
-//    }
-    
-    private func drawImagesFromPDF(withUrl url: URL) {
-        self.images = []
-
-        guard let document = CGPDFDocument(url as CFURL) else { return }
-        let pages = document.numberOfPages
-        var imageArray: [UIImage] = []
-        var count = 0
-        
-        while count < pages {
-            guard let page = document.page(at: count + 1) else { return }
-
-            let pageRect = page.getBoxRect(.mediaBox)
-            let renderer = UIGraphicsImageRenderer(size: pageRect.size)
-            let img = renderer.image { ctx in
-                UIColor.white.set()
-                ctx.fill(pageRect)
-
-                ctx.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
-                ctx.cgContext.scaleBy(x: 1.0, y: -1.0)
-
-                ctx.cgContext.drawPDFPage(page)
-            }
-            
-            imageArray.append(img)
-            count += 1
-        }
-        self.images = imageArray
     }
     
     private func showAlert(title: String, message: String) {
@@ -276,19 +236,6 @@ extension MainViewController: XMLParserDelegate {
 
 // MARK: - XMLParserDelegate
 extension MainViewController: MainPresenterView {
-    func successFetchImage(_ presenter: MainPresenter, data: Data) {
-        
-        DispatchQueue.main.async {
-            if let image = UIImage(data: data) {
-                self.images = []
-                self.images.append(image)
-            
-            } else {
-                self.showAlert(title: ViewerApp.Str.error, message: ViewerApp.ErrorMessages.invalidImageData)
-            }
-        }
-    }
-    
     func successGetImageList(_ presenter: MainPresenter, list: [Image]) {
         for image in list {
             self.items.append(image)

@@ -57,10 +57,10 @@ class BaseViewController: UIViewController {
 
 // MARK: - Navigation functions
 extension BaseViewController {
-    func goToItemDetailsPage(_ viewController: UIViewController, images: [UIImage]) {
+    func goToItemDetailsPage(_ viewController: UIViewController, request: URLRequest) {
         // Safe Push VC
         if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ItemDetailsViewController") as? ItemDetailsViewController {
-            viewController.images = images
+            viewController.request = request
             if let navigator = navigationController {
                 navigator.pushViewController(viewController, animated: true)
             }
