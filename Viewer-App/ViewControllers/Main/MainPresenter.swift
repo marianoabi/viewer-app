@@ -7,6 +7,7 @@
 
 import Moya_ObjectMapper
 
+// MARK: - Protocol
 protocol MainPresenterView {
     func showLoadingView()
     func removeLoadingView()
@@ -15,6 +16,7 @@ protocol MainPresenterView {
     func onError(_ presenter: MainPresenter, error: String)
 }
 
+// MARK: - Properties/Overrides
 class MainPresenter {
     private var view: MainPresenterView?
     private var picsumProvider: BaseMoyaProvider<PicsumService>?
@@ -27,6 +29,7 @@ class MainPresenter {
     
 }
 
+// MARK: - API Calls
 extension MainPresenter {
     func getImageList(limit: Int) {
         self.view?.showLoadingView()

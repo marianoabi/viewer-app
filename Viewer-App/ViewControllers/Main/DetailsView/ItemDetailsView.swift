@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - Properties/Overrides
 class ItemDetailsView: UIView {
     
 }

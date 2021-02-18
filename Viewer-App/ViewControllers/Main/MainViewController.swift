@@ -234,14 +234,14 @@ extension MainViewController: XMLParserDelegate {
     }
 }
 
-// MARK: - XMLParserDelegate
+// MARK: - MainPresenterView
 extension MainViewController: MainPresenterView {
     func successGetImageList(_ presenter: MainPresenter, list: [Image]) {
         for image in list {
             self.items.append(image)
         }
         
-        // Note: Add non-existent file at the bottom of the list to show "File not found" alert
+        // Note: Add non-existent file at the bottom of the list to show "File not found" Alert.
         let pdf = PDF()
         pdf.fileName = nil
         pdf.description = nil

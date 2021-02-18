@@ -35,7 +35,6 @@
 		7F137B0225DA734E00D0C923 /* FileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B0125DA734E00D0C923 /* FileType.swift */; };
 		7F137B0925DA798300D0C923 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B0825DA798300D0C923 /* String+Ext.swift */; };
 		7F137B0E25DA7F8000D0C923 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B0D25DA7F8000D0C923 /* Image.swift */; };
-		7F137B1525DA967500D0C923 /* ImgurService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B1425DA967500D0C923 /* ImgurService.swift */; };
 		7F137B1825DA969900D0C923 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B1725DA969900D0C923 /* BaseService.swift */; };
 		7F137B1C25DA987400D0C923 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B1B25DA987400D0C923 /* MainPresenter.swift */; };
 		7F137B2125DA993100D0C923 /* BaseMoyaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F137B2025DA993100D0C923 /* BaseMoyaProvider.swift */; };
@@ -78,7 +77,6 @@
 		7F137B0125DA734E00D0C923 /* FileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileType.swift; sourceTree = "<group>"; };
 		7F137B0825DA798300D0C923 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		7F137B0D25DA7F8000D0C923 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
-		7F137B1425DA967500D0C923 /* ImgurService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurService.swift; sourceTree = "<group>"; };
 		7F137B1725DA969900D0C923 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		7F137B1B25DA987400D0C923 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		7F137B2025DA993100D0C923 /* BaseMoyaProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMoyaProvider.swift; sourceTree = "<group>"; };
@@ -187,11 +185,10 @@
 			isa = PBXGroup;
 			children = (
 				7F137B2625DAC82600D0C923 /* Picsum */,
-				7F137B1F25DA991D00D0C923 /* Imgur */,
+				7F137B2B25DAC8C500D0C923 /* CoreService.swift */,
 				7F137B1725DA969900D0C923 /* BaseService.swift */,
 				7F137B2025DA993100D0C923 /* BaseMoyaProvider.swift */,
 				7F137B2325DAC7F600D0C923 /* VerbosePlugin.swift */,
-				7F137B2B25DAC8C500D0C923 /* CoreService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -315,14 +312,6 @@
 				7F137B0825DA798300D0C923 /* String+Ext.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		7F137B1F25DA991D00D0C923 /* Imgur */ = {
-			isa = PBXGroup;
-			children = (
-				7F137B1425DA967500D0C923 /* ImgurService.swift */,
-			);
-			path = Imgur;
 			sourceTree = "<group>";
 		};
 		7F137B2625DAC82600D0C923 /* Picsum */ = {
@@ -510,7 +499,6 @@
 				7F137A9625D98A2700D0C923 /* MainView.swift in Sources */,
 				7F137B2125DA993100D0C923 /* BaseMoyaProvider.swift in Sources */,
 				7F137AC125D9902A00D0C923 /* LabelPrimaryBold.swift in Sources */,
-				7F137B1525DA967500D0C923 /* ImgurService.swift in Sources */,
 				7F137A7725D988BA00D0C923 /* AppDelegate.swift in Sources */,
 				7F137A7925D988BA00D0C923 /* SceneDelegate.swift in Sources */,
 				7F137B2425DAC7F600D0C923 /* VerbosePlugin.swift in Sources */,

@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - Properties/Overrides
 class MainView: UIView {
     @IBOutlet weak var itemsTableView: UITableView!
 }
