@@ -8,5 +8,5 @@
 import Foundation
 
 class CoreService {
-    static let picsumBaseURLString = "https://picsum.photos/"
+    static let picsumBaseURLString = "https://picsum.photos/v2"
 }

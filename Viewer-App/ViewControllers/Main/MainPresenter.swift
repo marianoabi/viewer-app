@@ -5,7 +5,8 @@
 //  Created by Abigail Mariano on 2/15/21.
 //
 
-import Moya_ObjectMapper
+//import Moya_ObjectMapper
+import Foundation
 
 // MARK: - Protocol
 protocol MainPresenterView {
@@ -19,12 +20,10 @@ protocol MainPresenterView {
 // MARK: - Properties/Overrides
 class MainPresenter {
     private var view: MainPresenterView?
-    private var picsumProvider: BaseMoyaProvider<PicsumService>?
     private var delegate: MainViewController?
     
-    init(_ view: MainPresenterView, picsumProvider: BaseMoyaProvider<PicsumService>) {
+    init(_ view: MainPresenterView) {
         self.view = view
-        self.picsumProvider = picsumProvider
     }
     
 }
@@ -32,23 +31,37 @@ class MainPresenter {
 // MARK: - API Calls
 extension MainPresenter {
     func getImageList(limit: Int) {
-        self.view?.showLoadingView()
-        self.picsumProvider?.request(.getImageList(limit: limit), completion: { (result) in
-            self.view?.removeLoadingView()
-            switch result {
-            case let .success(response):
+        
+        let urlString = "\(CoreService.picsumBaseURLString)/list?limit=\(limit)"
+        var request = URLRequest(url: URL(string: urlString)!)
+        request.httpMethod = "GET"
+                
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request) { (data, response, error) in
+            
+            if error != nil {
+                DispatchQueue.main.async {
+                    self.view?.onError(self, error: error?.localizedDescription ?? ViewerApp.ErrorMessages.byDefault)
+                }
+            } else {
+                
                 do {
-                    let imageList = try response.mapArray(Image.self)
-                    self.view?.successGetImageList(self, list: imageList)
+                    let decoder = JSONDecoder()
+                    let images = try decoder.decode([Image].self, from: data!)
+                    
+                    DispatchQueue.main.async {
+                        self.view?.successGetImageList(self, list: images)
+                    }
                     
                 } catch {
-                    self.view?.onError(self, error: ViewerApp.ErrorMessages.mapJSONError)
+                    DispatchQueue.main.async {
+                        self.view?.onError(self, error: ViewerApp.ErrorMessages.decodeDataError)
+
+                    }
                 }
-                
-            case let .failure(error):
-                self.view?.onError(self, error: error.localizedDescription)
-                self.view?.removeLoadingView()
             }
-        })
+        }
+        
+        dataTask.resume()
     }
 }

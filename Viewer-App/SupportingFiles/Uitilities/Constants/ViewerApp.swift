@@ -22,11 +22,13 @@ struct ViewerApp {
     }
     
     struct ErrorMessages {
+        static let byDefault = "An error ocurred."
         static let fileNotFoundError = "File not found."
         static let invalidImageDataError = "Invalid Image data."
         static let parsingXMLError = "Error parsing XML."
         static let fetchingImageError = "Error fetching image."
         static let mapJSONError = "An error ocurred while mapping JSON."
+        static let decodeDataError = "Failed to decode data. Invalid response from server."
     }
     
     struct Str {

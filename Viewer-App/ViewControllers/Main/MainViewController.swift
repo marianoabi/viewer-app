@@ -18,8 +18,7 @@ class MainViewController: BaseViewController {
     private var items: [Any] = []
     private var pdfFile: PDF?
     
-    private var picsumProvider = BaseMoyaProvider<PicsumService>()
-    private lazy var presenter = MainPresenter(self, picsumProvider: picsumProvider)
+    private lazy var presenter = MainPresenter(self)
     
     override init() {
         super.init()

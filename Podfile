@@ -8,6 +8,5 @@ target 'Viewer-App' do
   # Pods for Viewer-App
 
 pod 'SwiftLint'
-pod 'Moya-ObjectMapper', '~> 2.9'
 
 end
