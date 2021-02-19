@@ -37,26 +37,30 @@ extension MainPresenter {
         request.httpMethod = "GET"
                 
         let session = URLSession.shared
+        self.view?.showLoadingView()
         let dataTask = session.dataTask(with: request) { (data, response, error) in
-            
-            if error != nil {
-                DispatchQueue.main.async {
-                    self.view?.onError(self, error: error?.localizedDescription ?? ViewerApp.ErrorMessages.byDefault)
-                }
-            } else {
+            DispatchQueue.main.async {
+                self.view?.removeLoadingView()
                 
-                do {
-                    let decoder = JSONDecoder()
-                    let images = try decoder.decode([Image].self, from: data!)
-                    
+                if error != nil {
                     DispatchQueue.main.async {
-                        self.view?.successGetImageList(self, list: images)
+                        self.view?.onError(self, error: error?.localizedDescription ?? ViewerApp.ErrorMessages.byDefault)
                     }
+                } else {
                     
-                } catch {
-                    DispatchQueue.main.async {
-                        self.view?.onError(self, error: ViewerApp.ErrorMessages.decodeDataError)
+                    do {
+                        let decoder = JSONDecoder()
+                        let images = try decoder.decode([Image].self, from: data!)
+                        
+                        DispatchQueue.main.async {
+                            self.view?.successGetImageList(self, list: images)
+                        }
+                        
+                    } catch {
+                        DispatchQueue.main.async {
+                            self.view?.onError(self, error: ViewerApp.ErrorMessages.decodeDataError)
 
+                        }
                     }
                 }
             }
